@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
  * POST /api/summarize
  * 
  * Accepts long-form marketing content and returns an AI-generated summary
- * optimized for the StackPulse card format.
+ * optimized for the MarStack card format.
  * 
  * Body: { content: string, maxLength?: number }
  * Returns: { summary: string, headline: string, keyTakeaways: string[] }
@@ -28,7 +28,6 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // OpenAI Chat Completion for summarization
     const response = await fetch("https://api.openai.com/v1/chat/completions", {
       method: "POST",
       headers: {
@@ -40,13 +39,7 @@ export async function POST(req: NextRequest) {
         messages: [
           {
             role: "system",
-            content: `You are a marketing content summarizer for StackPulse, a morning briefing app for marketers. 
-            Summarize the given content into:
-            1. A punchy headline (max 80 chars)
-            2. A concise summary (max ${maxLength} chars) that captures the key insight
-            3. 2-3 actionable takeaways
-            
-            Respond in JSON format: { "headline": "...", "summary": "...", "keyTakeaways": ["...", "..."] }`,
+            content: `You are a marketing content summarizer for MarStack, a morning briefing app for marketers. Summarize the given content into: 1. A punchy headline (max 80 chars) 2. A concise summary (max ${maxLength} chars) that captures the key insight 3. 2-3 actionable takeaways. Respond in JSON format: { "headline": "...", "summary": "...", "keyTakeaways": ["...", "..."] }`,
           },
           {
             role: "user",

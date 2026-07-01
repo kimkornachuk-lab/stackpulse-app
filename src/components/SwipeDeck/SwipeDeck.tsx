@@ -22,24 +22,14 @@ export function SwipeDeck({ insights }: SwipeDeckProps) {
     (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
       const { offset, velocity } = info;
 
-      // Swipe UP -> next topic
-      if (
-        offset.y < -SWIPE_THRESHOLD ||
-        velocity.y < -500
-      ) {
+      if (offset.y < -SWIPE_THRESHOLD || velocity.y < -500) {
         setDirection("up");
         setDepthLevel(0);
-        setCurrentIndex((prev) =>
-          prev < insights.length - 1 ? prev + 1 : 0
-        );
+        setCurrentIndex((prev) => (prev < insights.length - 1 ? prev + 1 : 0));
         return;
       }
 
-      // Swipe LEFT -> more depth on same topic
-      if (
-        offset.x < -SWIPE_THRESHOLD ||
-        velocity.x < -500
-      ) {
+      if (offset.x < -SWIPE_THRESHOLD || velocity.x < -500) {
         const maxDepth = currentInsight?.depth?.length ?? 0;
         if (depthLevel < maxDepth) {
           setDirection("left");
@@ -62,12 +52,7 @@ export function SwipeDeck({ insights }: SwipeDeckProps) {
       opacity: 0,
       scale: 0.95,
     }),
-    center: {
-      y: 0,
-      x: 0,
-      opacity: 1,
-      scale: 1,
-    },
+    center: { y: 0, x: 0, opacity: 1, scale: 1 },
     exit: (dir: "up" | "left" | null) => ({
       y: dir === "up" ? -300 : 0,
       x: dir === "left" ? -300 : 0,
@@ -93,33 +78,28 @@ export function SwipeDeck({ insights }: SwipeDeckProps) {
           onDragEnd={handleDragEnd}
           className="absolute w-full cursor-grab active:cursor-grabbing"
         >
-          <InsightCard
-            insight={currentInsight}
-            depthLevel={depthLevel}
-          />
+          <InsightCard insight={currentInsight} depthLevel={depthLevel} />
         </motion.div>
       </AnimatePresence>
 
-      {/* Progress indicator */}
       <div className="absolute top-2 right-4 flex gap-1">
         {insights.map((_, i) => (
           <div
             key={i}
             className={`h-1 w-6 rounded-full transition-colors ${
-              i === currentIndex ? "bg-pulse-accent" : "bg-white/10"
+              i === currentIndex ? "bg-mar-accent" : "bg-mar-border"
             }`}
           />
         ))}
       </div>
 
-      {/* Depth indicator */}
       {currentInsight.depth.length > 0 && (
         <div className="absolute left-4 top-1/2 -translate-y-1/2 flex flex-col gap-1">
           {[0, ...currentInsight.depth.map((_, i) => i + 1)].map((level) => (
             <div
               key={level}
               className={`h-6 w-1 rounded-full transition-colors ${
-                level === depthLevel ? "bg-pulse-glow" : "bg-white/10"
+                level === depthLevel ? "bg-mar-teal" : "bg-mar-border"
               }`}
             />
           ))}

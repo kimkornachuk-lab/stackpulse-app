@@ -3,13 +3,14 @@ import { PLACEHOLDER_INSIGHTS } from "@/lib/placeholderData";
 
 export default function Home() {
   return (
-    <main className="relative h-dvh w-full flex flex-col items-center justify-center overflow-hidden">
+    <main className="relative h-dvh w-full flex flex-col items-center justify-center overflow-hidden bg-mar-bg">
       {/* Header */}
       <header className="absolute top-0 inset-x-0 z-50 flex items-center justify-between px-5 pt-safe-top py-4">
-        <h1 className="text-lg font-bold tracking-tight text-pulse-accent">
-          StackPulse
+        <h1 className="text-lg font-bold tracking-tight">
+          <span className="text-mar-accent">Mar</span>
+          <span className="text-mar-text">Stack</span>
         </h1>
-        <button className="text-pulse-muted text-sm hover:text-white transition-colors">
+        <button className="mar-btn-secondary text-sm">
           My Stack
         </button>
       </header>

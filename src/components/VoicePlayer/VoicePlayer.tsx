@@ -44,8 +44,7 @@ export function VoicePlayer({ text }: VoicePlayerProps) {
     <button
       onClick={handlePlay}
       disabled={loading}
-      className="text-xs px-2.5 py-1.5 rounded-full bg-white/5 text-pulse-muted 
-                 hover:bg-white/10 hover:text-white transition-all disabled:opacity-50"
+      className="text-xs px-2.5 py-1.5 rounded-full bg-mar-subtle text-mar-accent hover:bg-mar-border transition-all disabled:opacity-50"
       aria-label={playing ? "Stop voiceover" : "Play voiceover"}
     >
       {loading ? "..." : playing ? "\u25fc" : "\u25b6"}
