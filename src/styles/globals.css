@@ -1,0 +1,33 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    overscroll-behavior: none;
+  }
+  
+  body {
+    @apply bg-pulse-dark text-pulse-text font-sans;
+    touch-action: pan-y;
+    overflow: hidden;
+    height: 100dvh;
+  }
+}
+
+@layer components {
+  .insight-card {
+    @apply rounded-2xl bg-pulse-card p-6 shadow-xl border border-white/5;
+    backdrop-filter: blur(12px);
+  }
+  
+  .swipe-indicator {
+    @apply absolute bottom-4 left-1/2 -translate-x-1/2 text-pulse-muted text-xs opacity-60;
+  }
+  
+  .pulse-btn {
+    @apply px-4 py-2 rounded-full bg-pulse-accent text-white font-medium 
+           transition-all active:scale-95 hover:bg-pulse-glow;
+  }
+}
