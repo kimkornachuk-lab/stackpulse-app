@@ -14,10 +14,6 @@ interface SwipeConfig {
   preventScroll?: boolean;
 }
 
-/**
- * Custom hook for touch swipe gesture detection.
- * Lightweight alternative when Framer Motion drag is overkill.
- */
 export function useSwipeGesture(
   handlers: SwipeHandlers,
   config: SwipeConfig = {}
@@ -34,9 +30,7 @@ export function useSwipeGesture(
 
   const onTouchMove = useCallback(
     (e: React.TouchEvent) => {
-      if (preventScroll) {
-        e.preventDefault();
-      }
+      if (preventScroll) e.preventDefault();
     },
     [preventScroll]
   );
